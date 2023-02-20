@@ -1,0 +1,402 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <title>Weather Center!</title>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Tangerine|Inconsolata|Droid+Sans">
+        <script src="https://kit.fontawesome.com/fe229d3f2b.js" crossorigin="anonymous"></script>
+        <style>
+          
+          body {
+            background-image: url(background.jfif);
+            display: grid;
+            justify-content: center;
+            justify-items: center;
+          }
+
+          h1 {
+            font-size: 0.5em;
+            font-family: 'Droid Sans', 'Tangerine', serif;
+          }
+          .title {
+            border-bottom: 10px;
+            border: black;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            width: 80%;
+            display: inline-flex;
+            justify-content: center;
+            border-bottom-style: solid;
+        }
+
+          .mustknow {
+            font-size: 14px;
+            margin-top: 0px;
+          }
+
+          .searchbox {
+            background-color: white;
+            width: 400px;
+            height: 210px;
+            font-family: 'Droid Sans', 'Tangerine', serif;
+            font-size: 30px;
+            text-shadow: 4px 4px 4px #aaa;
+            text-align: center;
+            margin-top: 50px;
+            border-radius: 10px;
+            box-shadow: 0.25em .25em 5em;
+            display: block;
+          }
+
+          .weatherinfobox {
+            background-color: white;
+            width: 900px;
+            height: 800px;
+            font-family: 'Droid Sans', 'Tangerine', serif;
+            font-size: 36px;
+            text-shadow: 4px 4px 4px #aaa;
+            text-align: center;
+            margin-top: 50px;
+            border-radius: 50px;
+            box-shadow: 0.25em .25em 5em;
+            display: block;
+          }
+
+          .currentweather {
+            border-radius: 17.5%;
+            box-shadow: black .3em .3em 1em;
+            width: 80%;
+            height: 500px;
+            margin-left: 10%;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+          }
+
+          .search {
+            border-color: #aaa;
+            height: 45%;
+            width: 80%;
+            margin-left: 10%;
+            margin-right: 10%;
+            border-radius: 30px;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            flex-direction: row;
+          }
+          .fa-magnifying-glass {
+            font-weight: 600;
+            margin-left: 5px;
+            padding: 10px;
+            font-size: 30px;
+            border-radius: 300px;
+            height: 55%;
+          }
+          .fa-magnifying-glass:hover {
+            background-color: #e2e2e2;
+            cursor: pointer;
+          }
+          .fa-location {
+            font-weight: 900;
+            margin-right: 10px;
+            font-size: 36px;
+            margin-top: 1%;
+            height: 40%;
+            outline: none;
+            border: none;
+            background-color: white;
+            border-radius: 30px;
+          }
+
+          .fa-location:hover {
+            cursor: pointer;
+            outline: none;
+            border: none;
+            background-color: white;
+          }
+
+          .fa-location:focus {
+            cursor: pointer;
+            outline: none;
+            border: none;
+            background-color: white;
+          }
+
+          .fa-droplet {
+            font-weight: 900;
+            font-size: 20px;
+          }
+
+          .fa-wind {
+            font-weight: 900;
+            font-size: 20px;
+          }
+
+          .fa-temperature-three-quarters {
+            font-weight: 900;
+            font-size: 20px;
+          }
+
+          .inputlat {
+            width: 200px;
+            text-align: center;
+            vertical-align: middle;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            border-radius: 2.65px;
+            border-bottom-width: 2.5px;
+            border-bottom-color: black;
+            height: 35px;
+            margin-top: 1%;
+            font-size: 26px;
+          }
+          .inputlat:focus {
+            width: 200px;
+            text-align: center;
+            vertical-align: middle;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            border-bottom-width: 2.5px;
+            border-bottom-color: black;
+            border-radius: 2.65px;
+            outline: none;
+            font-size: 26px;
+          }
+
+          .inputlong {
+            width: 200px;
+            text-align: center;
+            vertical-align: middle;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            border-radius: 2.65px;
+            border-bottom-width: 2.5px;
+            border-bottom-color: black;
+            height: 35px;
+            margin-top: 1%;
+            font-size: 26px;
+          }
+
+          .inputlong:focus {
+            width: 200px;
+            text-align: center;
+            vertical-align: middle;
+            border-top: none;
+            border-right: none;
+            border-left: none;
+            border-bottom-width: 2.5px;
+            border-bottom-color: black;
+            border-radius: 2.65px;
+            outline: none;
+            font-size: 26px;
+          }
+
+          input::-webkit-outer-spin-button,
+          input::-webkit-inner-spin-button {
+          -webkit-appearance: none;
+          
+          }
+          
+          .conditionheader {
+
+          }
+
+          .location {
+            margin-right: 5px;
+          }
+
+          .description {
+            font-size: 20px;
+            text-decoration: solid;
+            font: black;
+            width: 95%;
+            display: block;
+            margin-left: 2.5%;
+            margin-bottom: 1%;
+          }
+
+          .source {
+            font-size: 12px;
+          }
+        </style>
+    </head>
+    <body>
+        <div class="searchbox">
+            <p class="title">Let's find the weather!</p>
+            <div class="search">
+                <button class="fa-solid fa-location"></button>
+                <div class ="inputboxclass">
+                <input required class="inputlat" type="number" min="0.0000" max="75.0000" step=".0001" onKeyPress="if(this.value.length==7) return false;"  placeholder=" Latitude Here!" oninput="validity.valid||(value='');">
+                <input required class="inputlong" type="number" min="0.0000" max="170.0000" step=".0001" onKeyPress="if(this.value.length==8) return false;"  placeholder=" Longitude Here!" oninput="validity.valid||(value='');">
+                </div>
+                <button class="fa-solid fa-magnifying-glass"></button>
+            </div>
+            <p class="mustknow">Please give the Latitude in degrees North and Longitude in degrees west! (Only works for U.S. locations)</p>
+        </div>
+        <div class="weatherinfobox">
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <h1 class="location">The current weather at </h1><h1 class="weathernow"></h1>
+            </div>
+            <div class="currentweather">
+              <img src="" width="500" height="500" alt="weather icon">
+              
+            </div>
+            <p class="description"></p>
+            <h1 class="conditionheader">Conditions Right Now:</h1>
+            <div class = "Rightnow">
+            <i class="fa-solid fa-wind"> Wind: </i>
+            <i class="fa-solid fa-droplet"> Humidity: </i>
+            <i class="fa-solid fa-temperature-three-quarters"> Temperature: </i>
+            </div>
+            <p class="source">Weather data provided by the <a href="https://www.weather.gov/">National Weather Service</a> via api.weather.gov.</p>
+        </div>
+        <script>
+
+            const countError = 0
+            const weatherinfobox = document.querySelector('.weatherinfobox');
+            
+            
+            const currentweather = document.querySelector('.currentweather');
+            const buttonclick = document.querySelector('.fa-magnifying-glass');
+
+            buttonclick.addEventListener('click', () =>{
+              const locationreal = document.querySelector('.location');
+              const weathernow = document.querySelector('.weathernow');
+              const weatherdescription = document.querySelector('.description');
+              const tempnowreal = document.querySelector('.fa-temperature-three-quarters');
+              const humidnowreal = document.querySelector('.fa-droplet');
+              const windnowreal = document.querySelector('.fa-wind');
+
+              const weatherImage = document.querySelector('.currentweather img');
+              let imagePath; // sets up image change for when the forecast loads
+
+              // Get a reference to the input element for lat and then long
+              const inputlat = document.querySelector('.inputlat');
+
+              // Get the value of the input element
+              const latValue = inputlat.value;
+
+              // Log the value to the console
+              console.log(latValue);
+
+              const inputlong = document.querySelector('.inputlong');
+              
+              // Get the value of the input element
+              const lonValue = inputlong.value;
+
+              // Log the value to the console
+              console.log(lonValue);
+
+              if (latValue === '')
+              return;
+
+              if (lonValue === '')
+              return;
+              // Gets First Weather Response
+              fetch(`https://api.weather.gov/points/${latValue},-${lonValue}`).then(response=>
+              { 
+                if (response.status === 404) {
+                alert("The coordinates you entered are invalid or not from the United States. Please try again.");
+                return;
+                   }
+                else {
+                  return response.json();
+                }
+                response.json()}).then(
+                data => {
+                const city = data.properties.relativeLocation.properties.city;
+                const state = data.properties.relativeLocation.properties.state;
+                // Gets Second Weather API link(The one with the actual information on the weather!)
+                const forecasthourly = data.properties.forecastHourly;
+                console.log(forecasthourly);
+                const forecastUrl = data.properties.forecast;
+                console.log(forecastUrl);
+                locationreal.innerText = `The current weather at ${city}, ${state} `;
+
+                fetch(forecastUrl).then(response=> response.json()).then(
+                  data => {
+                    const periodnow = data.properties.periods.find(period => period.number === 1);
+                    const shortForecastdescription = periodnow.detailedForecast
+                    const shortForecastnow = periodnow.shortForecast;
+                    /* old code: weathernow.textContent = ` is ${shortForecastnow}. `; */
+                    weatherdescription.innerText = `${shortForecastdescription}`;
+                    console.log(periodnow);
+                })
+
+                fetch(forecasthourly).then(response=> response.json()).then(
+                  data => {
+                    const hournow = data.properties.periods.find(period => period.number === 1);
+                    const tempnow = hournow.temperature;
+                    const humidnow = hournow.relativeHumidity.value;
+                    const windnow = hournow.windSpeed;
+                    const winddirection = hournow.windDirection;
+                    const weatheroutnow = hournow.shortForecast;
+                    tempnowreal.textContent += `${tempnow}°F`;
+                    humidnowreal.textContent += `${humidnow}%`;
+                    windnowreal.textContent += `${windnow} ${winddirection}`;
+                    weathernow.textContent = ` is ${weatheroutnow}. `;
+                  
+                    if (weatheroutnow === 'Clear') {
+                    imagePath = "C:/Users/hbrun/OneDrive/Desktop/images/clear.png";
+                    } else if (weatheroutnow === 'Sunny') {
+                    imagePath = "C:/Users/hbrun/OneDrive/Desktop/images/sunny.png";
+                    } else if (weatheroutnow === 'Partly Cloudy') {
+                    imagePath = "C:/Users/hbrun/OneDrive/Desktop/images/partly-cloudy.png";
+                    } else if (weatheroutnow === 'Chance Snow Showers') {
+                    imagePath = "C:/Users/hbrun/OneDrive/Desktop/images/snow-shower.png";
+                    } else if (weatheroutnow === 'Snow Showers') {
+                    imagePath = "C:/Users/hbrun/OneDrive/Desktop/images/snow-shower.png";
+                    } else if (weatheroutnow === 'Partly Cloudy') {
+                    imagePath = "C:/Users/hbrun/OneDrive/Desktop/images/default.png";
+                    } else {
+                    // set a default image path in case weatheroutnow doesn't match any of the conditions above
+                    imagePath = "C:/Users/hbrun/OneDrive/Desktop/images/default.png";
+                    }
+
+                    weatherImage.setAttribute('src', imagePath);
+                })
+
+
+
+
+
+
+              })
+            })
+
+            // Define the onclick function for the button
+            function getLocation() {
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+            alert("Geolocation is not supported by this browser.");
+            }
+            }
+
+            // Define the function that will be called when the user's location is retrieved
+            function showPosition(position) { 
+            const inputlat = document.querySelector('.inputlat');
+            const inputlong = document.querySelector('.inputlong');
+            
+            inputlatval = position.coords.latitude;
+            inputlat.value = inputlatval.toFixed(4);
+            inputlongval = Math.abs(position.coords.longitude);
+            inputlong.value = inputlongval.toFixed(4);
+            }
+          
+            // Attach the onclick function to the button element
+            const buttona = document.querySelector(".fa-location");
+            buttona.onclick = getLocation;
+
+
+
+        </script>
+    </body>
+    <div class="displaynone" style="display: none;">
+      <h1>min="0.0000" max="75.0000" min="-170.0000" max="170.0000"     oninput="validity.valid||(value='');"</h1>
+    </div>
+</html>
